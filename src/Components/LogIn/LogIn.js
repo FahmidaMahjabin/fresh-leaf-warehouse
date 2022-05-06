@@ -7,12 +7,15 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 const Login = () => {
     // console.log("auth:",auth);
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
     const gotoRegisterpage = () =>{
         navigate("/register")
 
     }
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+    // const location = useLocation();
+    // const from = location.state?.from?.pathname || "/";
+    // console.log("from:", from)
     const [
         signInWithEmailAndPassword,
         user,
@@ -28,7 +31,10 @@ const Login = () => {
 
         
     }
-    navigate(from, { replace: true } );
+    if(user){
+        navigate(from, {replace: true})
+    }
+    // navigate(from, { replace: true } );
     const {createUserUsingGoogle, createuserUsingFacebook} = useToSignInWithThirdParty();
     return (
         <div className="formContainer my-5 text-center">
