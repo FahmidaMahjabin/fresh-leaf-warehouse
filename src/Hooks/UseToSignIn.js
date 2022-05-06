@@ -12,19 +12,22 @@ const useToSignInWithThirdParty = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const createUserUsingGoogle = () => {
         signInWithGoogle();
-        console.log("google user created")
-        if (googleUser) {
-            navigate(from, { replace: true } );
-        }
+        navigate(from, { replace: true } )
+        // console.log("google user created")
+        // if (googleUser) {
+        //     console.log("navigate from google user")
+        //     navigate(from, { replace: true } );
+        // }
     }
     // function = sign in with facebook
     const [signInWithFacebook, facebookUser, facebookLoading, facebookError] = useSignInWithFacebook(auth);
     const createuserUsingFacebook = () => {
         signInWithFacebook();
         console.log("facebook user created")
-        if (facebookUser) {
-            navigate(from, { replace: true } );
-        }
+        navigate(from, { replace: true } )
+        // if (facebookUser) {
+        //     navigate(from, { replace: true } );
+        // }
     }
     return (
         {createUserUsingGoogle, createuserUsingFacebook}

@@ -14,11 +14,13 @@ const Home = () => {
             console.log("data:", data)
 
              setItems(data.data);
+             
             
         })
     },
     [])
-
+    const sixItem = items.slice(0, 6);
+    console.log(sixItem);
     console.log("items", items)
     const inventoryList = [];
     for(let item of items){
@@ -31,7 +33,7 @@ const Home = () => {
             <GetNavbar></GetNavbar>
             <Banner></Banner>
             <div className = "row m-5">
-                {items?.map(item => <Inventory key = {item._id} item = {item}></Inventory>)}
+                {sixItem?.map(item => <Inventory key = {item._id} item = {item}></Inventory>)}
                 
             </div>
 

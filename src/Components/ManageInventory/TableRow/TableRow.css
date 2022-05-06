@@ -1,0 +1,9 @@
+.itemImg{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+.deleteIcon{
+    height: 20px;
+    width: 20px;
+}

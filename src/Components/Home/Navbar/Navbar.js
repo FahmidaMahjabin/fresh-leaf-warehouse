@@ -24,7 +24,7 @@ const GetNavbar = () => {
                     <Nav>
                         {user ?
                             <div className='d-flex'>
-                                <Nav.Link as={Link} to="/manageItems">Manage Items</Nav.Link>
+                                <Nav.Link as={Link} to="/manageInventory">Manage Inventory</Nav.Link>
                                 <Nav.Link as={Link} to="/addItems">Add Items</Nav.Link>
                                 <Nav.Link as={Link} to="/myItems">My Items</Nav.Link>
                                 <buttton type = "button" onClick = {getSignOut} className = "btn btn-link">Log Out</buttton>

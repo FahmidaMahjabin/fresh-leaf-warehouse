@@ -27,13 +27,15 @@ const Login = () => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
-        signInWithEmailAndPassword(email, password)
-
+        signInWithEmailAndPassword(email, password);
+        console.log("sign in ")
+        navigate(from, {replace: true})
+        
         
     }
-    if(user){
-        navigate(from, {replace: true})
-    }
+    // if(user){
+    //     navigate(from, {replace: true})
+    // }
     // navigate(from, { replace: true } );
     const {createUserUsingGoogle, createuserUsingFacebook} = useToSignInWithThirdParty();
     return (
