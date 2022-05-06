@@ -7,49 +7,73 @@ const ManageItem = () => {
     const { id } = useParams();
     const [item, setItem] = useState({});
     const { name, picture, quantity, about, balance, supplier } = item;
-    
+
     useEffect(() => {
         axios.get(`http://localhost:5000/inventory/${id}`)
             .then(data => setItem(data.data))
     }, [item])
-    const deliverItem = ()=>{
+    const deliverItem = () => {
         console.log("devivered called");
-        
-        if (quantity >1){
+
+        if (quantity > 1) {
             // axios(
             // {   
             //     method: "PUT",
             //     url:  `http://localhost:5000/inventory/${id}`,
             //     body: {quantity: 1}
             // } 
-           
-            // )
-            axios.put(`http://localhost:5000/inventory/${id}`)
-            .then(res =>{
-                console.log("res received client:", res);
-                
 
-            } )
+            // )
+            axios.put(`http://localhost:5000/inventory/${id}`, { quantity: `${quantity - 1}` })
+                .then(res => {
+                    console.log("res received client:", res);
+                })
         }
-        else{
+        else {
             alert("quantity can't be negative")
-        }    
+        }
     }
     
+
+    // function = addToQuantity
+    // step1:input value jeta pabo seta integer e convert korbo 
+    // step2:id diye database theke item khuje ber korbo 
+    // step3: oi quantity er sathe add kore reponse send korbo
+    const addToQuantity = (event) =>{
+        event.preventDefault();
+        const restock = parseInt(event.target.quantity.value);
+        // console.log("restock:", restock);
+        axios.put(`http://localhost:5000/inventory/${id}`, { quantity: `${parseInt(quantity) + restock}` })
+                .then(res => {
+                    console.log("res received client:", res);
+                })
+
+
+    }
     return (
-        <Card className = "text-center mx-auto my-5" style = {{width:"500px"}}>
-            <Card.Img variant="top" src={picture} />
-            <Card.Body>
-                <Card.Title>{name}</Card.Title>
-                <Card.Text>
-                    <h5>Price:{balance}</h5>
-                    <h5>quantity:{quantity}</h5>
-                    <h5>Supplier:{supplier}</h5>
-                    <p>Description:{about}</p>
-                </Card.Text>
-                <Button variant="primary" onClick = {deliverItem} >Delivered</Button>
-            </Card.Body>
-        </Card>
+        <div>
+            <Card className="text-center mx-auto my-5" style={{ width: "500px" }}>
+                <Card.Img variant="top" src={picture} />
+                <Card.Body>
+                    <Card.Title>{name}</Card.Title>
+                    <Card.Text>
+                        <h5>Price:{balance}</h5>
+                        <h5>quantity:{quantity}</h5>
+                        <h5>Supplier:{supplier}</h5>
+                        <p>Description:{about}</p>
+                    </Card.Text>
+                    <Button variant="primary" onClick={deliverItem} >Delivered</Button>
+                </Card.Body>
+            </Card>
+            <div className='bg-light mx-auto my-5 text-center'>
+                <h1>Re-Stock</h1>
+                <form onSubmit={addToQuantity}>
+                    <input  type = "number" placeholder='add stock' name = "quantity"></input>
+                    <input name = "submitBtn"  type = "submit" className='btn btn-success' placeholder = "Add to Stock"></input>
+                </form>
+            </div>
+        </div>
+
     );
 };
 
