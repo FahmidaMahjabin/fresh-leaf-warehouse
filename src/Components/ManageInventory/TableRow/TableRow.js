@@ -5,20 +5,26 @@ import "./TableRow.css";
 
 const TableRow = ({ item }) => {
     const {items, setItems} = UseAllItems();
+    console.log("items:", items)
     const {_id, name, picture, quantity, balance } = item;
     const deleteItem = (id) =>{
-        axios.delete(`http://localhost:5000/inventory/${id}`)
-        .then(res =>{
-            const response = window.confirm("are you sure to delete?");
-            if(response){
-                const remaindItem = items.filter(item._id !== id);
-                setItems(remaindItem)
-                console.log("response of delete:", res)
-            }
-    }
+        const response = window.confirm("are you sure to delete?");
+        if(response){
+            axios.delete(`http://localhost:5000/inventory/${id}`)
+            .then(
+                data =>{
+                    console.log("data from delete:", data)
+                    const remaindItem = items.filter(oneItem =>oneItem._id !== id);
+                    setItems(remaindItem)
+                    // console.log("response of delete:", res)
 
-        )
-        
+                }
+                
+
+            )
+
+            
+        }
     }
 
     return (
