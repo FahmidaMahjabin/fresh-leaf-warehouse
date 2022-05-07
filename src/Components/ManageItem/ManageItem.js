@@ -13,21 +13,20 @@ const ManageItem = () => {
             .then(data => setItem(data.data))
     }, [item])
     const deliverItem = () => {
-        console.log("devivered called");
+        console.log("devivered item:", item);
 
         if (quantity > 1) {
-            // axios(
-            // {   
-            //     method: "PUT",
-            //     url:  `http://localhost:5000/inventory/${id}`,
-            //     body: {quantity: 1}
-            // } 
-
-            // )
+            
             axios.put(`http://localhost:5000/inventory/${id}`, { quantity: `${quantity - 1}` })
                 .then(res => {
                     console.log("res received client:", res);
                 })
+
+            // add item to my order list
+            axios.post("http://localhost:5000/myItems", item)
+            .then(data =>
+                {console.log("data from my item:", data)}
+                )
         }
         else {
             alert("quantity can't be negative")
