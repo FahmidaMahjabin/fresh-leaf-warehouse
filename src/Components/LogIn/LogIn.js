@@ -19,8 +19,7 @@ const Login = () => {
     const [
         signInWithEmailAndPassword,
         user,
-        loading,
-        error,
+        
       ] = useSignInWithEmailAndPassword(auth);
     // function = getToLogIn
     const getToLogIn = (event) =>{
@@ -33,9 +32,9 @@ const Login = () => {
         
         
     }
-    // if(user){
-    //     navigate(from, {replace: true})
-    // }
+    if(user){
+        navigate(from, {replace: true})
+    }
     // navigate(from, { replace: true } );
     const {createUserUsingGoogle, createuserUsingFacebook} = useToSignInWithThirdParty();
     return (
