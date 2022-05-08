@@ -1,11 +1,22 @@
 
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
-import UseAllItems from '../../Hooks/UseAllItems';
+
 
 import TableRow from './TableRow/TableRow';
 const ManageInventory = () => {
-    
-    const {items, setItems} = UseAllItems();
+    console.log("came into manage inventory")
+    const [items, setItems] = useState([])
+    useEffect(() =>{
+        axios.get("http://localhost:5000/inventory")
+        .then(data =>{
+            console.log("data:", data)
+
+             setItems(data.data);    
+        })
+    },
+    [])
     return (
         <div>
             <h1>Inventory Manage</h1>
@@ -20,7 +31,7 @@ const ManageInventory = () => {
                   </tr>
               </thead>
               <tbody>
-                    {items.map(item => <TableRow key = {item._id} item = {item}></TableRow>)}
+                    {items.map(item => <TableRow key = {item._id} item = {item} setItems={setItems}></TableRow>)}
               </tbody>
 
         </Table>  

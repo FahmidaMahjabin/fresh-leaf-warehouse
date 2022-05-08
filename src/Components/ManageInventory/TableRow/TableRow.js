@@ -3,9 +3,9 @@ import axios from "axios";
 import UseAllItems from "../../../Hooks/UseAllItems";
 import "./TableRow.css";
 
-const TableRow = ({ item }) => {
-    const {items, setItems} = UseAllItems();
-    console.log("items:", items)
+const TableRow = ({ item, setItems }) => {
+    // const {items, setItems} = UseAllItems();
+    // console.log("items:", items)
     const {_id, name, picture, quantity, balance } = item;
     const deleteItem = (id) =>{
         const response = window.confirm("are you sure to delete?");
@@ -13,9 +13,10 @@ const TableRow = ({ item }) => {
             axios.delete(`http://localhost:5000/inventory/${id}`)
             .then(
                 data =>{
-                    console.log("data from delete:", data)
-                    const remaindItem = items.filter(oneItem =>oneItem._id !== id);
-                    setItems(remaindItem)
+                    console.log("data from delete:", data);
+                    setItems(data.data)
+                    // const remaindItem = items.filter(oneItem =>oneItem._id !== id);
+                    // setItems(remaindItem)
                     // console.log("response of delete:", res)
 
                 }
