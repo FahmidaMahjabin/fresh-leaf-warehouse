@@ -10,36 +10,41 @@ import Register from './Components/Register/Register';
 import RequireAuth from './Components/RequireAuth/RequireAuth';
 import ManageInventory from './Components/ManageInventory/ManageInventory';
 import AddItem from './Components/AddItem/AddItem';
+import { Navbar } from 'react-bootstrap';
+import GetNavbar from './Components/Home/Navbar/Navbar';
 
 function App() {
   return (
-    <Routes>
-      <Route path = "/" element = {<Home></Home>}></Route>
-      <Route path = "/inventory" element = {<Inventory></Inventory>}></Route>
-      <Route path = "/inventory/:id" element = {
-        <RequireAuth>
-          <ManageItem></ManageItem>
-        </RequireAuth>
-      
-      }></Route>
-      <Route path = "/myItems" element = {
-        <RequireAuth>
+    <div>
+      <GetNavbar></GetNavbar>
+      <Routes>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/inventory" element={<Inventory></Inventory>}></Route>
+        <Route path="/inventory/:id" element={
+          <RequireAuth>
+            <ManageItem></ManageItem>
+          </RequireAuth>
+
+        }></Route>
+        <Route path="/myItems" element={
+          <RequireAuth>
             <MyItem></MyItem>
-        </RequireAuth>}>
-      </Route>
-      <Route path = "/manageInventory" element = {
-        <RequireAuth>
+          </RequireAuth>}>
+        </Route>
+        <Route path="/manageInventory" element={
+          <RequireAuth>
             <ManageInventory></ManageInventory>
-        </RequireAuth>}>
-      </Route>
-      <Route path = "/addItem" element = {
-        <RequireAuth>
+          </RequireAuth>}>
+        </Route>
+        <Route path="/addItem" element={
+          <RequireAuth>
             <AddItem></AddItem>
-        </RequireAuth>}>
-      </Route>
-      <Route path = "/logIn" element = {<LogIn></LogIn>}></Route>
-      <Route path = "/register" element = {<Register></Register>}></Route>  
-    </Routes>
+          </RequireAuth>}>
+        </Route>
+        <Route path="/logIn" element={<LogIn></LogIn>}></Route>
+        <Route path="/register" element={<Register></Register>}></Route>
+      </Routes>
+    </div>
   );
 }
 

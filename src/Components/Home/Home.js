@@ -4,12 +4,13 @@ import GetNavbar from './Navbar/Navbar';
 import axios from 'axios';
 import {useState } from 'react';
 import Inventory from '../Inventory/Inventory';
+import Footer from './Footer';
 
 const Home = () => {
     const [items, setItems] = useState([]);
     useEffect(() =>
     {
-        axios.get("http://localhost:5000/inventory")
+        axios.get("https://murmuring-retreat-77466.herokuapp.com/inventory")
         .then(data =>{
             console.log("data:", data)
 
@@ -30,12 +31,13 @@ const Home = () => {
     return (
         <div>
             
-            <GetNavbar></GetNavbar>
+            
             <Banner></Banner>
             <div className = "row m-5">
                 {sixItem?.map(item => <Inventory key = {item._id} item = {item}></Inventory>)}
                 
             </div>
+            <Footer></Footer>
 
         </div>
     );

@@ -10,7 +10,7 @@ const AddItem = () => {
         const image = event.target.image.value;
         const item = {name, quantity, price, image};
         console.log("added item:", item)
-        axios.post("http://localhost:5000/inventory", item)
+        axios.post("https://murmuring-retreat-77466.herokuapp.com/inventory", item)
         .then(res => console.log("res for update:", res))
 
 

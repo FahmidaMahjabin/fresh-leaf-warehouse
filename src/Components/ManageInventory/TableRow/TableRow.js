@@ -10,7 +10,7 @@ const TableRow = ({ item, setItems }) => {
     const deleteItem = (id) =>{
         const response = window.confirm("are you sure to delete?");
         if(response){
-            axios.delete(`http://localhost:5000/inventory/${id}`)
+            axios.delete(`https://murmuring-retreat-77466.herokuapp.com/inventory/${id}`)
             .then(
                 data =>{
                     console.log("data from delete:", data);

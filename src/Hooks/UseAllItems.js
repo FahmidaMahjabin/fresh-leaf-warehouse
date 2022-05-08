@@ -4,7 +4,7 @@ import axios from 'axios';
 const UseAllItems = () => {
     const [items, setItems] = useState([])
     useEffect(() =>{
-        axios.get("http://localhost:5000/inventory")
+        axios.get("https://murmuring-retreat-77466.herokuapp.com/inventory")
         .then(data =>{
             console.log("data:", data)
 

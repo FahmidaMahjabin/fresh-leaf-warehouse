@@ -4,19 +4,20 @@ import { Button, Card } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 const ManageItem = () => {
-    useEffect(() => {
-        axios.get(`http://localhost:5000/inventory/${id}`)
-            .then(data => setItem(data.data))
-    }, [])
-    const { id } = useParams();
     const [item, setItem] = useState({});
+    useEffect(() => {
+        axios.get(`https://murmuring-retreat-77466.herokuapp.com/inventory/${id}`)
+            .then(data => setItem(data.data))
+    }, [item])
+    const { id } = useParams();
     
-    const { name, picture, about, balance, supplier } = item;
+    
+    const { name, picture, about, balance, supplier, quantity } = item;
     console.log("item.quantity: ",item.quantity)
-    const [quantity, setQuantity] = useState(item.quantity);
-    if(item.quantity === 0){
-        setQuantity(item.quantity)
-    }
+    // const [quantity, setQuantity] = useState(item.quantity);
+    // if(item.quantity === 0){
+    //     setQuantity(item.quantity)
+    // }
 
 
     const deliverItem = () => {
@@ -24,16 +25,16 @@ const ManageItem = () => {
 
         if (quantity > 1) {
             
-            axios.put(`http://localhost:5000/inventory/${id}`)
+            axios.put(`https://murmuring-retreat-77466.herokuapp.com/inventory/${id}`, {quantity: quantity-1})
                 .then(res => {
                     console.log("res received client:", res);
-                    if(res.data){
-                        setQuantity(quantity-1)
-                    }
+                    // if(res.data){
+                    //     setQuantity(quantity-1)
+                    // }
                 })
 
             // add item to my order list
-            // axios.post("http://localhost:5000/myItems", item)
+            // axios.post("https://murmuring-retreat-77466.herokuapp.com/myItems", item)
             // .then(data =>
             //     {console.log("data from my item:", data)}
             //     )
@@ -52,7 +53,7 @@ const ManageItem = () => {
         event.preventDefault();
         const restock = parseInt(event.target.quantity.value);
         // console.log("restock:", restock);
-        axios.put(`http://localhost:5000/inventory/${id}`, { quantity: `${parseInt(quantity) + restock}` })
+        axios.put(`https://murmuring-retreat-77466.herokuapp.com/inventory/${id}`, { quantity: `${parseInt(quantity) + restock}` })
                 .then(res => {
                     console.log("res received client:", res);
                 })
