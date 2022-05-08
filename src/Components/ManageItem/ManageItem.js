@@ -4,29 +4,39 @@ import { Button, Card } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 const ManageItem = () => {
-    const { id } = useParams();
-    const [item, setItem] = useState({});
-    const { name, picture, quantity, about, balance, supplier } = item;
-
     useEffect(() => {
         axios.get(`http://localhost:5000/inventory/${id}`)
             .then(data => setItem(data.data))
-    }, [item])
+    }, [])
+    const { id } = useParams();
+    const [item, setItem] = useState({});
+    
+    const { name, picture, about, balance, supplier } = item;
+    console.log("item.quantity: ",item.quantity)
+    const [quantity, setQuantity] = useState(item.quantity);
+    if(item.quantity === 0){
+        setQuantity(item.quantity)
+    }
+
+
     const deliverItem = () => {
-        console.log("devivered item:", item);
+        console.log("delivered item:", item);
 
         if (quantity > 1) {
             
-            axios.put(`http://localhost:5000/inventory/${id}`, { quantity: `${quantity - 1}` })
+            axios.put(`http://localhost:5000/inventory/${id}`)
                 .then(res => {
                     console.log("res received client:", res);
+                    if(res.data){
+                        setQuantity(quantity-1)
+                    }
                 })
 
             // add item to my order list
-            axios.post("http://localhost:5000/myItems", item)
-            .then(data =>
-                {console.log("data from my item:", data)}
-                )
+            // axios.post("http://localhost:5000/myItems", item)
+            // .then(data =>
+            //     {console.log("data from my item:", data)}
+            //     )
         }
         else {
             alert("quantity can't be negative")
@@ -37,7 +47,7 @@ const ManageItem = () => {
     // function = addToQuantity
     // step1:input value jeta pabo seta integer e convert korbo 
     // step2:id diye database theke item khuje ber korbo 
-    // step3: oi quantity er sathe add kore reponse send korbo
+    // step3: oi quantity er sathe add kore response send korbo
     const addToQuantity = (event) =>{
         event.preventDefault();
         const restock = parseInt(event.target.quantity.value);
@@ -61,7 +71,7 @@ const ManageItem = () => {
                         <h5>Supplier:{supplier}</h5>
                         <p>Description:{about}</p>
                     </Card.Text>
-                    <Button variant="primary" onClick={deliverItem} >Delivered</Button>
+                    <Button variant="primary" onClick={deliverItem} >Deliver</Button>
                 </Card.Body>
             </Card>
             <div className='bg-light mx-auto my-5 text-center'>
