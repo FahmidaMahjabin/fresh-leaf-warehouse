@@ -11,9 +11,9 @@ const getSignOut = () =>{
 const GetNavbar = () => {
     const [user] = useAuthState(auth);
     return (
-        <Navbar collapseOnSelect expand="lg" bg="info" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="success" variant="dark">
             <Container>
-                <Navbar.Brand to="#home">React-Bootstrap</Navbar.Brand>
+                <Navbar.Brand to="#home">Green Leaf Warehouse</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
@@ -27,7 +27,7 @@ const GetNavbar = () => {
                                 <Nav.Link as={Link} to="/manageInventory">Manage Inventory</Nav.Link>
                                 <Nav.Link as={Link} to="/addItem">Add Item</Nav.Link>
                                 <Nav.Link as={Link} to="/myItems">My Items</Nav.Link>
-                                <buttton type = "button" onClick = {getSignOut} className = "btn btn-link">Log Out</buttton>
+                                <buttton type = "button" onClick = {getSignOut}  className = "btn btn-link">Log Out</buttton>
                             </div>
                             :
                             <Nav.Link as={Link} to="/logIn">Log In</Nav.Link>

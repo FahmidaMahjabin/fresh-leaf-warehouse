@@ -10,7 +10,7 @@ import Register from './Components/Register/Register';
 import RequireAuth from './Components/RequireAuth/RequireAuth';
 import ManageInventory from './Components/ManageInventory/ManageInventory';
 import AddItem from './Components/AddItem/AddItem';
-import { Navbar } from 'react-bootstrap';
+
 import GetNavbar from './Components/Home/Navbar/Navbar';
 
 function App() {
